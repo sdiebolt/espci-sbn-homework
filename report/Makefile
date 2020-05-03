@@ -6,12 +6,20 @@ DOC=main
 
 COMPILER=/Library/TeX/texbin/pdflatex
 ARGS=--shell-escape
+BIBTEX=/Library/TeX/texbin/bibtex
 
 RM=/bin/rm
 
-$(DOC).pdf: $(DOC).tex
+$(DOC).pdf: $(DOC).bbl $(DOC).tex
 	$(COMPILER) $(ARGS) $(DOC).tex -draftmode
 	$(COMPILER) $(ARGS) $(DOC).tex 
+
+$(DOC).bbl: $(DOC).aux
+	$(BIBTEX) $(DOC).aux
+
+$(DOC).aux: $(DOC).bib
+	$(COMPILER) $(ARGS) $(DOC).tex -draftmode
+	$(COMPILER) $(ARGS) $(DOC).tex -draftmode
 
 .PHONY: all clean cleanall
 
