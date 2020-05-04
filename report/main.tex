@@ -338,8 +338,10 @@
   They wanted to compare the fitness of a double mutant with the sum of the
   fitness of the two single mutants. Only the double mutants where the two
   single mutants went through the filter are selected. The epistasis is defined
-  as :
-  $$ \epsilon = f_{AB} - (f_{A} + f_{B}) $$
+  as:
+  \begin{equation}\label{eq:epistasis}
+    \varepsilon = f_{AB} - (f_A + f_B).
+  \end{equation}
 
   The idea is to compare the epistasis for different concentrations of
   rifampicin, in order to see if we gain or not combining two mutations, and to
@@ -430,6 +432,81 @@
     \label{fig:fitnessdistrib}
   \end{figure}
 
+  As observed by the authors of the supporting article, the histograms show
+  bimodal distributions for all mutations and unimodal distributions for
+  synonymous mutations only at each rifampicin concentration. As synonymous
+  mutations are unlikely to cause rifampicin resistance~\cite{choudhury2020},
+  the authors defined a threshold for resitant mutations as
+  \begin{equation}\label{eq:resistthreshold}
+    t = \mu_{\text{syn}, i} + 2.56 \times \sigma_{\text{syn}, i},
+  \end{equation}
+  where $\mu_{\text{syn}, i}$ and $\sigma_{\text{syn}, i}$ are respectively the
+  mean and standard deviation of the normal probability density function fitted
+  on the fitness of synonymous mutations for rifampicin concentration $i$. The
+  2.56 constant is an approximate value of the 99.5\% percentile point of the
+  standard normal distribution. Therefore, the second mode of the distribution
+  of all mutations for each condition corresponds to non-synonymous mutations
+  that conferred resistance to rifampicin. 
+
+  It is interesting to see that while both modes seem symmetric
+  at low rifampicin concentration, this symmetry is broken at higher
+  concentrations, with a frequency decrease of resistant mutations. This
+  observation could mean that the resistance property of some variants is
+  concentration-dependent.
+
+  \subsection{Epistasis in Double Mutants}
+
+  After studying how fitness estimates can help understand the impact of
+  rifampicin concentrations on selection---this section isn't studied in this
+  report---, the authors were concerned with the effects of epistasis in double
+  mutants. The actual fitness of double mutants was compared to the sum of
+  fitness from the respective single mutations. Figure~\ref{fig:epidouble}
+  shows scatter plots of these comparisons for each condition.
+
+  \begin{figure}[ht]
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/scatter10}
+    \end{subfigure}
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/scatter50}
+    \end{subfigure}
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/scatter100}
+    \end{subfigure}
+    \caption{Scatter plots of actual fitness from double mutants vs.\ sum of
+    fitness from the respective single mutation, at different concentrations of
+    rifampicin, $\SI{10}{\micro\gram\per\milli\liter}$ (left),
+    $\SI{50}{\micro\gram\per\milli\liter}$ (middle),
+    $\SI{100}{\micro\gram\per\milli\liter}$ (right). Double mutants were
+    categorized as combination of two resistant mutations (blue), one resistant
+    and one sensitive mutations (red) or two sensitive mutations (green). The
+    orange shaded areas correspond to the $\pm 3$ standard deviations interval
+    for the normal approximation of the synonymous mutations fitness.}%
+    \label{fig:epidouble}
+  \end{figure}
+
+  Given the definition of epistasis introduced in
+  equation~\eqref{eq:epistasis}, all double mutants that deviate from the
+  45\si{\degree} dashed line on Figure~\ref{fig:epidouble} are affected by
+  epistasis. The double mutants were categorized as combination of two
+  resistant mutation, one resistant and one sensitive mutation or two sensitive
+  mutations using the same threshold from equation~\eqref{eq:resistthreshold}.
+  We observe that these three groups show different epistatic behaviour. Not
+  enough double mutations were classified as both sensitive in the
+  $\SI{10}{\micro\gram\per\milli\liter}$ condition, but the group shows
+  positive epistasis, meaning that the combination of sensitive mutations is
+  more beneficial than what would be infered by a simple linear relationship.
+  This same phenomenon is observed for the double mutants consisting of one
+  resistant and one sensitive mutation. Interestingly however, the double
+  mutants that are combinations of two resistant mutations show negative
+  epistasis. This effect could be explained by the fact that the cost of adding
+  a resistance mutation to a variant that already is rifampicin-resistant is
+  too detrimental to increase the fitness.
+
+  \subsection{Distribution of Epistasis Effects}
 
   \section{Next Steps}
 
