@@ -513,7 +513,7 @@
   a resistance mutation to a variant that is already rifampicin-resistant is
   too detrimental and thus decreases the fitness.
 
-  \begin{figure}[ht]
+  \begin{figure}[!ht]
     \begin{subfigure}{.5\textwidth}
       \centering
       \includegraphics[width=\linewidth]{../output/pieres100}
@@ -536,7 +536,7 @@
   The epistasis effect, computed using equation~\eqref{eq:epistasis}, was
   compared between rifampicin concentrations.
 
-  \begin{figure}[ht]
+  \begin{figure}[!ht]
     \begin{subfigure}{.33\textwidth}
       \centering
       \includegraphics[width=\linewidth]{../output/scatter100vs10}
@@ -563,6 +563,47 @@
 
   \section{Next Steps}
 
+  CREPE is the only know technology to be able to target a specific gene and
+  precisely study the impact of epistasis on such a high-resolution. It is very
+  interesting to compare and create data that can be compared to the biochemical,
+  evolutionary, and epidemiological findings that could need more resolution. It
+  is of high value to contribute to the database of know mutation and its
+  epistasis link and characteristic. It participates in the design of the big
+  picture to understand natural principles of evolution and gain resistance, to
+  an antibiotic for example. Analyzing such a huge database can be gruesome but
+  it opens a lot of doors.
+
+  CREPE as though some limitations. First, its available target size is pretty
+  narrow, between 300 to 400 bp. This forces the use of a segmentation analysis
+  for a bigger gene region or to adapt the analysis to the whole genome. Each
+  segment must have its gRNA, which specificity greatly limits the span of the
+  area of study. Second, some mutations are not obtainable as the error-prone PCR
+  limits the mutation frequency to one per amino acid. This limitation restricts
+  the span of mutations observable by the study, and it is amplified with
+  epistasis as interaction is also seen in consecutive mutations. This method is,
+  therefore, unable to attain mutagenesis saturation on farther amino acids. 
+
+  Finally, regarding CREPE, as recombineering using a linear dsDNA donor with
+  single nucleotide changes is poorly understood, the mechanism can introduce
+  biases that are linked to the PAM sequence and its distance with other similar
+  sites. But because the CREPE method is as efficient, as it is affordable and
+  quick, it is of great interest to improve those shortcomings. 
+
+  Besides, those short-comings can become a path of research to predict possible
+  epistasis between mutations, even if they are not able to be tested in-vivo,
+  and thus be able to build a model of interaction and mutagenesis profile. Using
+  the new high-definition description, it is possible to more clearly depict the
+  epistasis model as the indicator it is of the complexity of the genetic
+  algorithm. It is possible to use an epistasis-based basis estimation method as
+  it is extremely efficient. In parallel, it would be interesting to integrate
+  larger donor variants to see the impact. The addition of multiplexing would
+  also be of interest to the push for large-scale parallel development.  
+
+  Finally, the use of machine learning tools was not appropriate, as they did not
+  produce satisfactory results, for this analysis of epistasis, but this does
+  not, in any case, diminish the potential that clustering might have regarding
+  the position or distance between mutations on epistasis. A bigger map is in
+  this case greatly needed, thus further research.
 
 
   \newpage
