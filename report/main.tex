@@ -75,7 +75,8 @@
       \includegraphics[width=0.8\textwidth]{espci_logo}
  
       \Large
-      \textbf{Teachers:} Philippe Nghe, Andrew Griffiths
+      \textbf{Teachers:} Paul B. Rainey, Gisella Vetere, Philippe Nghe, Clément
+      Nizak
     \end{center}
     \thispagestyle{empty}
   \end{titlepage}
@@ -92,10 +93,11 @@
   Its authors applied the technology to target \textit{rpoB}, the gene encoding
   the $\beta$ subunit of bacterial RNA polymerase, and used deep sequencing to
   study resistance against the antibiotic rifampicin. In particular, the
-  authors studied epistastis effects by comparing fitness of double mutants in
+  authors studied epistatic effects by comparing fitness of double mutants in
   \textit{rpoB} with those from the respective single mutations in the presence
   of rifampicin. In this report, we replicated the aforementioned epistasis
-  study using a simplified dataset provided by A. Choudhury.}
+  study using a simplified dataset provided by A. Choudhury, the main author
+  of CREPE.}
 
   \section{State of the Art}
 
@@ -497,16 +499,67 @@
   We observe that these three groups show different epistatic behaviour. Not
   enough double mutations were classified as both sensitive in the
   $\SI{10}{\micro\gram\per\milli\liter}$ condition, but the group shows
-  positive epistasis, meaning that the combination of sensitive mutations is
-  more beneficial than what would be infered by a simple linear relationship.
-  This same phenomenon is observed for the double mutants consisting of one
-  resistant and one sensitive mutation. Interestingly however, the double
-  mutants that are combinations of two resistant mutations show negative
-  epistasis. This effect could be explained by the fact that the cost of adding
-  a resistance mutation to a variant that already is rifampicin-resistant is
-  too detrimental to increase the fitness.
+  positive epistasis in other conditions, meaning that the combination of
+  sensitive mutations is more beneficial than what would be infered by a simple
+  linear relationship. This could be explained by the steric hindrance caused
+  by multiple mutations on the binding site of rifampicin.
 
-  \subsection{Distribution of Epistasis Effects}
+  A positive epistasis is also observed in the double mutants consisting of one
+  resistant and one sensitive mutation. Figure~\ref{fig:epidirection} shows
+  that approximately 65.2\% of double mutants in this category display positive
+  epistasis. Interestingly however, we observe that the double mutants that are
+  combinations of two resistant mutations show 73.1\% negative and no positive
+  epistasis. This effect could be explained by the fact that the cost of adding
+  a resistance mutation to a variant that is already rifampicin-resistant is
+  too detrimental and thus decreases the fitness.
+
+  \begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/pieres100}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/piemixed100}
+    \end{subfigure}
+    \caption{Distribution of epistasis direction in combinations of two
+    resistant mutations (left) or one resistant mutation and one sensitive
+    mutation (right) at a rifampicin concentration of
+    $\SI{100}{\micro\gram\per\milli\liter}$.}%
+    \label{fig:epidirection}
+  \end{figure}
+
+  Finally, the authors pointed out that the evolutionary consequence of a
+  mutation is partly determined by the growth
+  environment~\cite{remold2004}~\cite{weinreich2005}, meaning that from the
+  same mutation, given two growth environment, different populations can arise.
+  The epistasis effect, computed using equation~\eqref{eq:epistasis}, was
+  compared between rifampicin concentrations.
+
+  \begin{figure}[ht]
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/scatter100vs10}
+    \end{subfigure}
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/scatter50vs10}
+    \end{subfigure}
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/scatter100vs50}
+    \end{subfigure}
+    \caption{Scatter plots of epistasis effects, computed as the difference
+    between the actual fitness of the double mutant and the sum of fitness of
+    the respective single mutations, for conditions
+    $\SI{100}{\micro\gram\per\milli\liter}$ vs.\
+    $\SI{10}{\micro\gram\per\milli\liter}$ (left),
+    $\SI{50}{\micro\gram\per\milli\liter}$ vs.\
+    $\SI{10}{\micro\gram\per\milli\liter}$ (middle) and
+    $\SI{100}{\micro\gram\per\milli\liter}$ vs.\
+    $\SI{50}{\micro\gram\per\milli\liter}$ (right).}%
+    \label{fig:epicompare}
+  \end{figure}
 
   \section{Next Steps}
 
