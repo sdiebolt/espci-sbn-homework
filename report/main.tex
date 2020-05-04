@@ -20,6 +20,8 @@
 
 \usepackage{graphicx}
 
+\usepackage{subcaption}
+
 \usepackage{solarized-light}
 \lstset{%
   basicstyle = \ttfamily\footnotesize, 
@@ -292,20 +294,35 @@
 
   \subsection{Fitness calculations}
 
-  After the data acquisition, we have two columns, representing the number of
-  colonies before (pre) and after (post) the rifampicin exposition. The fitness
-  is estimated as :
-  $$ fitness = log(\frac{C_{i, post}+0.5}{C_{wt, post}+0.5})-log(\frac{C_{i, pre}+0.5}{C_{wt, pre}+0.5}) $$
-  where $post$ is for the post-selection ($10$, $50$ \& $100$ $\mu g/mL$) and
-  $pre$ is for the pre-selection (at the beginning). $wt$ designates the
-  wild-type variant. The standard error is calculated using the Poisson
-  approximation :
-  $$ StandError = \sqrt{\frac{1}{C_{i, post}+0.5} + \frac{1}{C_{wt, post}+0.5} + \frac{1}{C_{i, pre}+0.5} + \frac{1}{C_{wt, pre}+0.5}} $$
+  For each variant, the fitness was estimated as 
+  \begin{equation}\label{eq:fitnessscore}
+    f = \log\left(\frac{C_{i, \text{post}} + 0.5}{C_{\text{wt}, \text{post}} +
+    0.5}\right) - 
+    \log\left(\frac{C_{i, \text{pre}} + 0.5}{C_{\text{wt}, \text{pre}} +
+    0.5}\right),
+  \end{equation}
+  where $C_{i, \text{post}}$ and $C_{i, \text{pre}}$ are the variant read
+  counts, respectively post- and pre-selection, for condition
+  $i\in\{\SI{10}{\micro\gram\per\milli\liter},
+  \SI{50}{\micro\gram\per\milli\liter},
+  \SI{100}{\micro\gram\per\milli\liter}\}$, and $C_{\text{wt}, \text{post}}$
+  and $C_{\text{wt}, \text{pre}}$ are the wild-type read counts, respectively
+  post- and pre-selection~\cite{rubin2017}. The $\frac{1}{2}$ constant was
+  added to each count to assist with very small counts. The standard error of
+  this estimate was computed as
+  \begin{equation}\label{eq:fitnesserror}
+    \SE(f) = \sqrt{\frac{1}{C_{i, \text{post}}} + \frac{1}{C_{i, \text{pre}}} +
+    \frac{1}{C_{\text{wt}, \text{post}}} + \frac{1}{C_{\text{wt},
+    \text{pre}}}}.
+  \end{equation}
 
   A filter is necessary in the data. Not all the reads are relevant. Because
   they have targeted an essential gene, they consider that stop codons could
   not repeat. They used the following filter:
-  $$ C_{i} \geq C_{stop\,codon, pre} + 2.56.\sqrt{C_{stop\,codon, pre}}$$
+  \begin{equation}\label{eq:stopfilter}
+    C_{i} \geq C_{\text{max-stopcodon}} + 2.56 \times
+    \sqrt{C_{\text{max-stopcodon}}}.
+  \end{equation}
   Only the reads following this condition are kept. For each replicate, the
   fitness have been combined using Fisher score iterations (Rubin et al. 2017).
   Only the synonymous mutations have been selected in the dataset. The criteria
@@ -360,34 +377,59 @@
   In this dataset, the wild-type corresponds to the row having the highest
   pre-selection read counts. The dataset was further processed using code
   available in the archive attached with this report and on a GitHub repository
-  (\url{https://github.com/sdiebolt/espci-sbn-homework}). First, non-synonymous
-  mutations were extracted from the \lstinline{aa_change} column. The dataset
-  was then aggregated by grouping on the non-synonymous mutations and summing
-  their counts. This step was performed to ensure that later epistasis analyses
-  have access to a dataset containing a unique observation of each combination
-  of non-synonymous mutations.
+  (\url{https://github.com/sdiebolt/espci-sbn-homework}). First, all rows that
+  don't contain the SPM were removed from the dataset. Then, non-synonymous
+  mutations were extracted from the \lstinline{aa_change} column the dataset
+  was aggregated by grouping on the non-synonymous mutations and summing their
+  counts. This step was performed to ensure that later epistasis analyses have
+  access to a dataset containing a unique observation of each combination of
+  non-synonymous mutations. The fitness score and its standard error were then
+  computed for each variant using equations~\eqref{eq:fitnessscore}
+  and~\eqref{eq:fitnesserror}. Finally, the filter described in
+  equation~\eqref{eq:stopfilter} was used to remove erroneous reads. These
+  steps resulted in a dataset containing 483 unique synonymous and
+  non-synonymous mutations, with read counts, fitness and fitness standard
+  error for each condition (pre-selection and rifampicin at concentrations
+  $\SI{10}{\micro\gram\per\milli\liter}$,
+  $\SI{50}{\micro\gram\per\milli\liter}$ and
+  $\SI{100}{\micro\gram\per\milli\liter}$)
 
-  For each variant, the fitness was estimated as 
-  \begin{equation}
-    f = \log\left(\frac{C_{i, \text{post}} + 0.5}{C_{\text{wt}, \text{post}} +
-    0.5}\right) - 
-    \log\left(\frac{C_{i, \text{pre}} + 0.5}{C_{\text{wt}, \text{pre}} +
-    0.5}\right),
-  \end{equation}
-  where $C_{i, \text{post}}$ and $C_{i, \text{pre}}$ are the variant read
-  counts, respectively post- and pre-selection, for condition
-  $i\in\{\SI{10}{\micro\gram\per\milli\liter},
-  \SI{50}{\micro\gram\per\milli\liter},
-  \SI{100}{\micro\gram\per\milli\liter}\}$, and $C_{\text{wt}, \text{post}}$
-  and $C_{\text{wt}, \text{pre}}$ are the wild-type read counts, respectively
-  post- and pre-selection~\cite{rubin2017}. The $\frac{1}{2}$ constant was
-  added to each count to assist with very small counts. The standard error of
-  this estimate was computed as
-  \begin{equation}
-    \SE(f) = \sqrt{\frac{1}{C_{i, \text{post}}} + \frac{1}{C_{i, \text{pre}}} +
-    \frac{1}{C_{\text{wt}, \text{post}}} + \frac{1}{C_{\text{wt},
-    \text{pre}}}}.
-  \end{equation}
+  \subsection{Distribution of Fitness in Synonymous vs.\ All Mutations}
+
+  Since epistasis is measured using non-synonymous mutations only, We were
+  first interested in the distribution of fitness estimates for all mutations
+  and only synonymous mutations. Figure~\ref{fig:fitnessdistrib} shows
+  histograms of these distributions for each selection condition.
+
+  \begin{figure}[ht]
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/hist10}
+    \end{subfigure}
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/hist50}
+    \end{subfigure}
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../output/hist100}
+    \end{subfigure}
+    \caption{Distribution of fitness estimates for all mutations (orange) and
+    for synonymous mutations only (blue) at different concentrations of
+    rifampicin, $\SI{10}{\micro\gram\per\milli\liter}$ (left),
+    $\SI{50}{\micro\gram\per\milli\liter}$ (middle),
+    $\SI{100}{\micro\gram\per\milli\liter}$ (right). The orange and blue lines
+    are probability densities estimated using kernel density estimation,
+    respectively for all mutations and synonymous mutations only. The red
+    vertical line corresponds to the resistant mutations threshold, defined as
+    $t = \mu_{\text{syn}, i} + 2.56 \times \sigma_{\text{syn}, i}$, where
+    $\mu_{\text{syn}, i}$ and $\sigma_{\text{syn}, i}$ are respectively the
+    mean and standard deviation of the normal probability density function
+    fitted on the fitness of synonymous mutations for rifampicin concentration
+    $i$.}%
+    \label{fig:fitnessdistrib}
+  \end{figure}
+
 
   \section{Next Steps}
 
