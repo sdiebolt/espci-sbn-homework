@@ -8,6 +8,9 @@
 
 \usepackage{microtype}
 
+% Disable ligatures in listings.
+\DisableLigatures[f]{encoding = *, family = tt*}
+
 \usepackage[english]{babel}
 \usepackage{csquotes}
 
@@ -26,7 +29,8 @@
   belowskip  = 20pt
 }
 
-\usepackage{hyperref}
+% Passing option hyphens to url to allow line breaks in urls.
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage{xcolor-solarized}
 
 \hypersetup{%
@@ -91,9 +95,170 @@
   of rifampicin. In this report, we replicated the aforementioned epistasis
   study using a simplified dataset provided by A. Choudhury.}
 
+  \section*{State of the Art}
+
+  Studying epistasis---be it in human or within bacteria---raises many
+  challenges, as it can rarely be done using observational studies. However,
+  understanding how combinations of mutations affect protein functions and
+  behaviour within cells could give us insights into a huge number of
+  biological processes, from antibiotic resistance to genetic diseases. In this
+  section, we establish a non-exhaustive review of available methods and
+  technologies used for studying epistasis in bacteria.
+
+  Deep mutational scanning (DMS) can provide significant insights into the
+  function of essential genes in bacteria. This method couples genotype to
+  phenotype to assess the activities of as many as 1 million mutant versions of
+  a protein in a single experiment~\cite{fowler2014deep}. DMS is capable of
+  scoring comprehensive libraries of genotypes for fitness in given
+  environments in a massively parallel fashion. Essential bacterial genes are
+  often targets of interest as they are key to their evolution, and can lead to
+  phenotypes such as antibiotic resistance when mutated. 
+
+  When the phenotype of interest is the cell's fitness in a specific
+  environment, the existence of genetic interactions between mutations, i.e.\
+  epistasis, can constrain the course of evolution. Given the potential impact
+  of epistasis in a variety of biological processes, recent studies have
+  focused on measuring genome-wide levels of epistasis using the multiplex
+  automated genome engineering (MAGE) technology~\cite{wang2012}. MAGE was
+  created for large-scale programming and evolution of cells: it simultaneously
+  targets many locations on a chromosome for modification in a single cell or
+  across a population of cells, thus producing combinatorial genomic diversity.
+  It is based on lambda red-mediated recombination of single-stranded oligos to
+  introduce mutations at specific genomic loci~\cite{wang2009programming}.
+
+  However, the MAGE technology has some limitations, as it was optimized only
+  for a few cell strains and can lead to the accumulation of numerous
+  off-target modifications. A recent study improved on MAGE by using a
+  dominant-negative mutant protein of the methyl-directed mismatch repair (MMR)
+  system, allowing efficient modification of multiple loci, without
+  any observable off-target mutagenesis and prior modification of the host
+  genome. This improved technology, termed pORTMAGE, was used to achieve a
+  transient suppression of DNA repair in \textit{Escherichia coli}. In
+  addition, pORTMAGE allows comparison of epistatic effects across a wide range
+  of bacterial species~\cite{nyerges2016highly}.
+
+  Progress toward the aim to curb the tendency of bacteria to evolve as
+  antibiotic resistant, requires a comprehensive understanding of the key
+  factors that contribute to resistance. To study the evolution of bacteria
+  population, and stimulate or generate resistant inducing mutations, different
+  research team use robotic lab-evolution platform that keeps population size
+  and selection pressure under tight control for hundreds of Escherichia coli
+  populations evolving in parallel. Using these methods, it was discovered that
+  membrane transport, LPS biosynthesis, and chaperones curtail the evolvability
+  of resistance. Perturbations of efflux pumps prevented resistance evolution
+  completely or forced evolution on inferior mutational
+  paths~\cite{lukacisinova2019exploiting}. These observations are very
+  favorable for the exploration of key actionable plans to establish in the
+  future. But the difficulty relies in the scalability of those information,
+  the vast number of possible epistatic interactions erodes statistical power.
+  As the size of genome-wide association studies (GWAS) increases, detecting
+  interactions among single nucleotide polymorphisms (SNP) or genes associated
+  to particular phenotypes is garnering more and more interest as a means to
+  decipher the full genetic basis of complex diseases. 
+
+  Systematically testing interactions is however challenging both from a
+  computational and from a statistical point of view, given the large number of
+  possible interactions to consider~\cite{slim2019novel}. Thus it is of
+  interest to build models to predict genetic traits based on epistasis. The
+  MINED algorithm, like other later, detect very efficiently significant
+  pairwise epistasis effects that contribute most to fitness. And its
+  prediction accuracy is to be even better using faster and different
+  mathematical models~\cite{he2015mined}. But this comes with computational
+  challenges. In fact, epistasis detection modeling use the one-step Markov
+  Decision Process where the state is genome data, the actions are the
+  interacted genes, and the reward is an interaction measurement for the
+  selected actions~\cite{huang2019epirl}. But those limits could be overcome
+  with the help of machine learning.
+
+  On the other hand, CRISPR-Cas9 technology also allows for investigating how
+  gene expression governs the adaptive pathways available to bacteria during
+  the evolution of resistance. In that sense, CRISPR EnAbled Trackable genome
+  Engineering (CREATE), the combinaison of CRISPR–Cas9 gene editing and a
+  massively parallel oligomer synthesis allows for a trackable editing on a
+  genome-wide scale. CREATE has been used for site saturation mutagenesis for
+  protein engineering, and for the study of antibiotic resistance genes in
+  bacteria. Thus, it could be of great use for the study of epistasis in E.
+  Coli, but the use of CRISPRCas9 in these bacteria has been linked to cell
+  death. Indeed, because bacteria mainly rely on homologous recombination, to
+  repair double strand breaks, with the simultaneous cleavage of all copies of
+  the Escherichia coli chromosome at the same position cannot be repaired. But
+  inefficient cleavage can be repaired, thus creating a random chance of
+  survival of the bacteria population. Linked with other downfall, the CREATE
+  methods, is only usable for the study of mutants with a very noticeable
+  impact on the fitness. As the use of gRNAs generate variable outcome, is
+  linked to diminished editing efficiency, inadvertent non repairable
+  mutations, and inducing errors with unedited cell lines. 
+
+  Another method for studying mutation and epistasis with CRISPRcas9 is the
+  recently developed, HoSeI method. It is a genetic marker-less genome editing
+  approach and introduces base substitutions in the target sequence on the
+  original genome by screening dead or alive cells. It was performed on E. coli
+  K-12 genome. It is prone to be used for the knockout of multiple genes and
+  artificial introduction of mutations, which are useful experimental
+  demonstrations of bacterial genome-wide epistatic
+  phenomena~\cite{miyake2020epistatic}. It uses the combinaison of the
+  construction of sgRNA expression plasmid and transformation of E. Coli strain
+  harbouring pCas by the psgRNA-target and DNA fragment to recover the digested
+  site by CRISPR-Cas9~\cite{xie2014genome}.
+
+  In addition to that, the method most often used to generate variants with
+  random mutations is error-prone PCR\@. Error-prone PCR protocols are
+  modifications of standard PCR methods, designed to alter and enhance the
+  natural error rate of the polymerase. Taq polymerase is commonly used because
+  of its naturally high error rate. Creating high-quality libraries of random
+  sequences is an important step in this process as it allows variants of
+  individual molecules to be generated from a single-parent sequence. Combine
+  with the synonymous PAM-inactivating mutation (SPM), precise genome
+  manipulation with high efficiency can be achieve in a few steps with the
+  CRISPRCas9 method~\cite{arnold2003directed}. 
+
+  Using all these method advantages and drawbacks, we aim to study the
+  epistasis of E. Coli using the newly designed CRISPR/Cas9-mediated genomic
+  error-prone editing (CREPE) technology.
+
   \section*{Motivations \& Hypotheses}
 
-  \section*{State of the Art}
+  Improvements in DNA synthesis and sequencing have underpinned comprehensive
+  assessment of gene function in bacteria. And currently, the genome
+  mutagenisis techniques and study are using genetic transfer networks to make
+  better predictions of the sequence or word sequence of an entire genome. But
+  low-editing efficiencies and mutational biasing, is a downfall that needs to
+  be attended to. It impacts greatly the quality of the fitness data.  In
+  recent years a small number of approaches have also achieved a high degree of
+  effectiveness without mutational annotation. 
+
+  The aim is to mesure the non-synonymous mutations and not the deletions.  In
+  this paper, we propose a novel model that achieves the goal.  The idea is to
+  investigate the functional basis of epistasis, and because rpoB plays a
+  central role in transcription, we measured the effects of common rpoB
+  mutations on transcriptional efficiency. Because mutations using the CREPE
+  technology allows the study of combination of mutations. Two mutations are
+  considered to be purely additive if the effect of the double mutation is the
+  amount of the consequences associated with the particular single variations.
+  This occurs whenever genetics are not linked with each other. Simple,
+  component qualities were researched in early stages in the particular
+  background of genes, they are usually fairly rare, along with many genes
+  showing a minimum of some degree of association with epistatic connection.
+
+  We address this concept by measuring the particular fitness effect associated
+  with rifampicin resistance mutations in the $\beta$ subunit of RNA polymerase
+  (rpoB) of Escherichia coli.  Epistasis for fitness means that the selective
+  effect of a mutation is conditional on the genetic background in which it
+  appears.Epistasis can be easily seen in nature, the process in which it is
+  involved is still not well known. Furthermore, its consequence on evolution,
+  and its role in natural selection is still incomplete to our knowledge. The
+  mutational path to high fitness genotypes is linked and even supposedly
+  dependent of the genetic background in which novel mutations appear. This
+  background effect is independent of the population as well as any loci of any
+  gene. Sign epistasis has been defined in that the sign of the fitness effect
+  of a mutation is under epistatic control~\cite{garst2017genome}. 
+
+  Thus, using the CREPE method we can assess the fitness effects of individual
+  mutations on the same loci, as well as on diverse location. All this in
+  correlation with the stress to which the bacteria are exposed. We want to
+  explore the theorical and empirical consideration implying the strong genetic
+  constraint on the selective accessibility to high fitness genotype mutation
+  path.
 
   \section*{Methods \& Results of the Supporting Article}
 
@@ -104,6 +269,55 @@
   on rifampicin resistance. In particular, we were interested in comparing the
   fitness of double mutants, compared to the sum of fitness from the respective
   single mutations.
+
+  \subsection*{Data Preprocessing}
+
+  The dataset provided by A. Choudhury was obtained by processing the
+  sequencing output from a single biological replicate. Paired Illumina reads
+  were assembled and aligned, and variant counts and amino acid changes were
+  extracted from the qrowdot alignment output. Finally, variants were
+  aggregated by grouping on the mutation positions and summing the read counts.
+  The result is a dataset where each row corresponds to a unique genotype, with
+  columns:
+  \begin{itemize}
+    \item \lstinline{aa_change}: list of amino acid changes, with original
+      amino acid, position and new amino acid;
+    \item \lstinline{pre}: read counts before selection;
+    \item \lstinline{ten}: read counts after selection on 
+      $\SI{10}{\micro\gram\per\milli\liter}$ of rifampicin;
+    \item \lstinline{fifty}: read counts after selection on 
+      $\SI{50}{\micro\gram\per\milli\liter}$ of rifampicin; 
+    \item \lstinline{hundred}: read counts after selection on 
+      $\SI{100}{\micro\gram\per\milli\liter}$ of rifampicin. 
+  \end{itemize}
+
+  In this dataset, the wild-type corresponds to the row having the highest
+  pre-selection read counts. The dataset was further processed using code
+  available in the archive attached with this report and on a GitHub repository
+  (\url{https://github.com/sdiebolt/espci-sbn-homework}). First, non-synonymous
+  mutations were extracted from the \lstinline{aa_change} column. 
+
+  For each variant, the fitness was estimated as 
+  \begin{equation}
+    f = \log\left(\frac{C_{i, \text{post}} + 0.5}{C_{\text{wt}, \text{post}} +
+    0.5}\right) - 
+    \log\left(\frac{C_{i, \text{pre}} + 0.5}{C_{\text{wt}, \text{pre}} +
+    0.5}\right),
+  \end{equation}
+  where $C_{i, \text{post}}$ and $C_{i, \text{pre}}$ are the variant read
+  counts, respectively post- and pre-selection, for condition
+  $i\in\{\SI{10}{\micro\gram\per\milli\liter},
+  \SI{50}{\micro\gram\per\milli\liter},
+  \SI{100}{\micro\gram\per\milli\liter}\}$, and $C_{\text{wt}, \text{post}}$
+  and $C_{\text{wt}, \text{pre}}$ are the wild-type read counts, respectively
+  post- and pre-selection~\cite{rubin2017}. The $\frac{1}{2}$ constant was
+  added to each count to assist with very small counts. The standard error of
+  this estimate was computed as
+  \begin{equation}
+    \SE(f) = \sqrt{\frac{1}{C_{i, \text{post}}} + \frac{1}{C_{i, \text{pre}}} +
+    \frac{1}{C_{\text{wt}, \text{post}}} + \frac{1}{C_{\text{wt},
+    \text{pre}}}}.
+  \end{equation}
 
   \section*{Next Steps}
 
