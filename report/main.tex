@@ -199,63 +199,67 @@
 
   \section{Motivations \& Hypotheses}
 
-  Improvements in DNA synthesis and sequencing have underpinned comprehensive
+  Improvements in DNA synthesis and sequencing have underpinned a comprehensive
   assessment of gene function in bacteria. And currently, the genome
-  mutagenisis techniques and study are using genetic transfer networks to make
+  mutagenesis techniques and study are using genetic transfer networks to make
   better predictions of the sequence or word sequence of an entire genome. But
-  low-editing efficiencies and mutational biasing, is a downfall that needs to
+  low-editing efficiencies and mutational biasing is a downfall that needs to
   be attended to. It impacts greatly the quality of the fitness data.  In
   recent years a small number of approaches have also achieved a high degree of
   effectiveness without mutational annotation. 
 
-  The aim is to mesure the non-synonymous mutations and not the deletions.  In
-  this paper, we propose a novel model that achieves the goal.  The idea is to
-  investigate the functional basis of epistasis, and because rpoB plays a
-  central role in transcription, we measured the effects of common rpoB
-  mutations on transcriptional efficiency. Because mutations using the CREPE
-  technology allows the study of combination of mutations. Two mutations are
-  considered to be purely additive if the effect of the double mutation is the
-  amount of the consequences associated with the particular single variations.
-  This occurs whenever genetics are not linked with each other. Simple,
-  component qualities were researched in early stages in the particular
-  background of genes, they are usually fairly rare, along with many genes
-  showing a minimum of some degree of association with epistatic connection.
+  The aim is to measure the non-synonymous mutations and not the deletions.  In
+  this paper, the author proposes a novel model that achieves the goal.  The
+  idea is to investigate the functional basis of epistasis, and because rpoB
+  plays a central role in transcription, we measured the effects of common rpoB
+  mutations on transcriptional efficiency. Because mutations using CREPE
+  technology allow the study of a combination of mutations. 
 
-  We address this concept by measuring the particular fitness effect associated
-  with rifampicin resistance mutations in the $\beta$ subunit of RNA polymerase
-  (rpoB) of Escherichia coli.  Epistasis for fitness means that the selective
-  effect of a mutation is conditional on the genetic background in which it
-  appears.Epistasis can be easily seen in nature, the process in which it is
-  involved is still not well known. Furthermore, its consequence on evolution,
-  and its role in natural selection is still incomplete to our knowledge. The
-  mutational path to high fitness genotypes is linked and even supposedly
-  dependent of the genetic background in which novel mutations appear. This
-  background effect is independent of the population as well as any loci of any
-  gene. Sign epistasis has been defined in that the sign of the fitness effect
-  of a mutation is under epistatic control~\cite{garst2017genome}. 
+  Two mutations are considered to be purely additive if the effect of the
+  double mutation is the amount of the consequences associated with the
+  particular single variations. This occurs whenever genetics are not dependent
+  on each other. Simple, component qualities were researched in early stages in
+  the particular background of genes, they are usually fairly rare, along with
+  many genes showing a minimum of some degree of association with the epistatic
+  connection.
 
-  Thus, using the CREPE method we can assess the fitness effects of individual
-  mutations on the same loci, as well as on diverse location. All this in
-  correlation with the stress to which the bacteria are exposed. We want to
-  explore the theorical and empirical consideration implying the strong genetic
-  constraint on the selective accessibility to high fitness genotype mutation
-  path.
+  This concept was addressed by measuring the particular fitness effect
+  associated with rifampicin resistance mutations in the $\beta$ subunit of
+  RNA polymerase (rpoB) of Escherichia coli. 
+
+  Epistasis for fitness means that the selective effect of a mutation is
+  conditional on the genetic background in which it appears. Epistasis can be
+  easily seen in nature, the process in which it is involved is still not well
+  known. Furthermore, its consequence on evolution and its role in natural
+  selection are still posing lots of unanswered questions. The mutational path
+  to high fitness genotypes is linked and even supposedly dependent on the
+  genetic background in which novel mutations appear. This background effect is
+  independent of the population as well as any loci of any gene. Sign epistasis
+  has been defined in that the sign of the fitness effect of a mutation is
+  under epistatic control \cite{garst2017genome}. 
+
+  Thus, using the CREPE method the fitness effects of individual mutations on
+  the same loci was assessed by this paper, as well as on diverse location. All
+  this in correlation with the stress to which the bacteria are exposed. The
+  article thus explores the theoretical and empirical consideration implying
+  the strong genetic constraint on the selective accessibility to high fitness
+  genotype mutation path.
 
   \section{Methods \& Results of the Supporting Article}
 
   \subsection{CREPE Protocol}
 
-  The CRISPR/Cas9-mediated genomic Error-Prone Editing (CREPE) is a method used
-  to induce mutations from an error-prone PCR in a targeted region using
-  CRISPR/cas9 method. First of all, a single functionnal gRNA must be found for
-  the target. Then a Synonymous Point accepted Mutation (SPM) is introduced in
-  the target. The next step is to amplify and clone the target region with the
-  SPM and unmutated end-homology (for the next step) into a plasmid, inducing
-  error-prone PCR libraries.
+  The CRISPR-Cas9-mediated genomic error-prone editing (CREPE) technology is a
+  method used to induce mutations obtained from an error-prone PCR in a
+  targeted region using CRISPR editing. First of all, a single functional gRNA
+  must be found for the target. Then a synonymous PAM-inactivating mutation
+  (SPM) is introduced in the target. The next step is to amplify and clone the
+  target region with the SPM and unmutated end-homology (for the next step)
+  into a plasmid, inducing error-prone PCR libraries.
 
   After that, a Cas9-mediated lambda red recombineering technique has been set
   up. And finally, before the selection, plasmids are cured from the cells at
-  37\textdegree C (Phillips 1999).
+  $\SI{37}{\celsius}$.
 
   \subsection{Antibiotic selection} 
 
@@ -270,21 +274,23 @@
   They decided to compare 4 different cultures. The first one is the wild-type
   E. coli MG1655, without any change. The second one is a single colony of E.
   coli MG 1655 + SPM in order to ensure that the SPM does not affect the
-  fitness of the cells. The third one is targeting the rpoB regions : gRNA +
-  SPM only (SPM in RRDR II) . And finally with mutations in addition : gRNA +
+  fitness of the cells. The third one is targeting the rpoB regions: gRNA +
+  SPM only (SPM in RRDR II). And finally with mutations in addition: gRNA +
   error-prone PCR synonymous PAM mutation (this adds mutations in the
-  rifampicin resistance-determining regions.
+  rifampicin resistance-determining regions).
 
-  They have made them grow at 37\textdegree C for 4 hours. After the growth,
-  the Optical Density (OD) at 600 nm have been measured to have a reference.
-  Then, they divided the cultures into 3 samples, each with a different
-  rifampicin concentration. The concentrations are $10$, $50$ and $100$ $\mu
-  g/mL$.
+  They have made them grow at $\SI{37}{\celsius}$ for 4 hours. After the
+  growth, the Optical Density (OD) at $\SI{600}{\nano\meter}$ have been
+  measured to have a reference.  Then, they divided the cultures into 3
+  samples, each with a different rifampicin concentration. The concentrations
+  are $\SI{10}{\micro\gram\per\milli\liter}$,
+  $\SI{50}{\micro\gram\per\milli\liter}$ and
+  $\SI{100}{\micro\gram\per\milli\liter}$.
 
   At the end, a part of the cultures are taken for next-gen sequencing, in
   order to know the mutations linked to the measured fitness.
 
-  \subsection{Data acquisition} 
+  \subsection{Data Acquisition} 
 
   After the selection, the libraries must be sequenced. The DNA was extracted.
   Each library is, after being amplified, sequenced using Nextera
@@ -294,7 +300,7 @@
   The raw data have been manipulated to extract information wanted, such as the
   amino acid changes.
 
-  \subsection{Fitness calculations}
+  \subsection{Fitness Calculations}
 
   For each variant, the fitness was estimated as 
   \begin{equation}\label{eq:fitnessscore}
@@ -331,11 +337,8 @@
   to determine if a mutant is resistant against the rifampicin is its fitness
   greater than 2.96 standard deviations than the mean fitness of synonymous
   mutations.
-  \newline
-  \newline
-  We used the same formulas in our personal analysis.
 
-  \subsection{Epistasis measurement}
+  \subsection{Epistasis Measurement}
 
   They wanted to compare the fitness of a double mutant with the sum of the
   fitness of the two single mutants. Only the double mutants where the two
@@ -534,7 +537,9 @@
   environment~\cite{remold2004}~\cite{weinreich2005}, meaning that from the
   same mutation, given two growth environment, different populations can arise.
   The epistasis effect, computed using equation~\eqref{eq:epistasis}, was
-  compared between rifampicin concentrations.
+  compared between rifampicin concentrations. Figure~\ref{fig:epicompare} shows
+  scatter plot for comparison of epistatis between all rifampicin
+  concentrations.
 
   \begin{figure}[!ht]
     \begin{subfigure}{.33\textwidth}
@@ -560,6 +565,16 @@
     $\SI{50}{\micro\gram\per\milli\liter}$ (right).}%
     \label{fig:epicompare}
   \end{figure}
+
+  We observe that in higher concentrations, in particular when comparing
+  epistasis at $\SI{50}{\micro\gram\per\milli\liter}$ and
+  $\SI{100}{\micro\gram\per\milli\liter}$ to epistasis at 
+  $\SI{10}{\micro\gram\per\milli\liter}$, some double mutants show
+  significantly higher magnitudes of epistasis. This means that in higher
+  concentrations, combinations of mutations are more likely to provide
+  resistance to rifampicin. This phenomenon increases the propagation of
+  resistance, as it means that random mutations in presence of antibiotics can
+  lead to an exponential increase in resistance.
 
   \section{Next Steps}
 
