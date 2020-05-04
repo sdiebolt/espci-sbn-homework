@@ -115,7 +115,7 @@
   phenotypes such as antibiotic resistance when mutated. 
 
   When the phenotype of interest is the cell's fitness in a specific
-  environment, the existence of genetic interactions between mutations, i.e.\
+  environment, the presence of genetic interactions between mutations, i.e.\
   epistasis, can constrain the course of evolution. Given the potential impact
   of epistasis in a variety of biological processes, recent studies have
   focused on measuring genome-wide levels of epistasis using the multiplex
@@ -137,84 +137,61 @@
   addition, pORTMAGE allows comparison of epistatic effects across a wide range
   of bacterial species~\cite{nyerges2016highly}.
 
-  Progress toward the aim to curb the tendency of bacteria to evolve as
-  antibiotic resistant, requires a comprehensive understanding of the key
-  factors that contribute to resistance. To study the evolution of bacteria
-  population, and stimulate or generate resistant inducing mutations, different
-  research team use robotic lab-evolution platform that keeps population size
-  and selection pressure under tight control for hundreds of Escherichia coli
-  populations evolving in parallel. Using these methods, it was discovered that
-  membrane transport, LPS biosynthesis, and chaperones curtail the evolvability
-  of resistance. Perturbations of efflux pumps prevented resistance evolution
-  completely or forced evolution on inferior mutational
-  paths~\cite{lukacisinova2019exploiting}. These observations are very
-  favorable for the exploration of key actionable plans to establish in the
-  future. But the difficulty relies in the scalability of those information,
-  the vast number of possible epistatic interactions erodes statistical power.
-  As the size of genome-wide association studies (GWAS) increases, detecting
-  interactions among single nucleotide polymorphisms (SNP) or genes associated
-  to particular phenotypes is garnering more and more interest as a means to
-  decipher the full genetic basis of complex diseases. 
+  Antibiotic resistance is one of the main topic of study when it
+  comes to understanding the effects of epistasis in bacteria, as the key
+  factors contributing to resistance are yet to be understood. A team of
+  researchers studied how epistatic effects in \textit{Escherichia coli} could
+  be used to perturb the evolution of bacteria towards antibiotic
+  resistance~\cite{lukacisinova2019exploiting}. In this context, robotic
+  lab-evolution platforms can be used to keep population size and selection
+  pressure constant for hundreds of bacteria populations evolving in parallel.
+  Using this method, specific cellular functions that drastically curtail the
+  evolvability of resistance where identified. Using whole-genome sequencing,
+  the team showed that strong negative epistasis was generally underlying these
+  functions.
 
-  Systematically testing interactions is however challenging both from a
-  computational and from a statistical point of view, given the large number of
-  possible interactions to consider~\cite{slim2019novel}. Thus it is of
-  interest to build models to predict genetic traits based on epistasis. The
-  MINED algorithm, like other later, detect very efficiently significant
-  pairwise epistasis effects that contribute most to fitness. And its
-  prediction accuracy is to be even better using faster and different
-  mathematical models~\cite{he2015mined}. But this comes with computational
-  challenges. In fact, epistasis detection modeling use the one-step Markov
-  Decision Process where the state is genome data, the actions are the
-  interacted genes, and the reward is an interaction measurement for the
-  selected actions~\cite{huang2019epirl}. But those limits could be overcome
-  with the help of machine learning.
+  The CRISPR gene editing technology, already widely used in genome
+  engineering, also allows for investigating how gene expression governs the
+  adaptive pathways available to bacteria during the evolution of resistance.
+  In that sense, the controlled hindrance of adaptation of organisms (CHAOS)
+  approach was recently developed to induce negative epistasis in
+  \textit{Escherichia coli} to deter adaptation~\cite{otoupal2018}. Using a
+  library of deactivated CRISPR-Cas9 devices, the team perturbed the bacterial
+  gene expression and observed that epistatic effects caused large losses of
+  cell fitness in environment containing ciprofloxacin, a clinically-relevant
+  antibiotic. Another team introduced the homologous sequence integration
+  (HoSeI) method to study bacterial genome-wide epistatic phenomena. HoSeI is a
+  genetic marker-less genome editing approach that introduces base
+  substitutions in the target sequence by screening dead or alive cells. It was
+  demonstrated in a strain of \textit{Escherichia coli} to study the effects of
+  epistasis on regulators of bacteria adaptive
+  growth~\cite{miyake2020epistatic}.
 
-  On the other hand, CRISPR-Cas9 technology also allows for investigating how
-  gene expression governs the adaptive pathways available to bacteria during
-  the evolution of resistance. In that sense, CRISPR EnAbled Trackable genome
-  Engineering (CREATE), the combinaison of CRISPR–Cas9 gene editing and a
-  massively parallel oligomer synthesis allows for a trackable editing on a
-  genome-wide scale. CREATE has been used for site saturation mutagenesis for
-  protein engineering, and for the study of antibiotic resistance genes in
-  bacteria. Thus, it could be of great use for the study of epistasis in E.
-  Coli, but the use of CRISPRCas9 in these bacteria has been linked to cell
-  death. Indeed, because bacteria mainly rely on homologous recombination, to
-  repair double strand breaks, with the simultaneous cleavage of all copies of
-  the Escherichia coli chromosome at the same position cannot be repaired. But
-  inefficient cleavage can be repaired, thus creating a random chance of
-  survival of the bacteria population. Linked with other downfall, the CREATE
-  methods, is only usable for the study of mutants with a very noticeable
-  impact on the fitness. As the use of gRNAs generate variable outcome, is
-  linked to diminished editing efficiency, inadvertent non repairable
-  mutations, and inducing errors with unedited cell lines. 
-
-  Another method for studying mutation and epistasis with CRISPRcas9 is the
-  recently developed, HoSeI method. It is a genetic marker-less genome editing
-  approach and introduces base substitutions in the target sequence on the
-  original genome by screening dead or alive cells. It was performed on E. coli
-  K-12 genome. It is prone to be used for the knockout of multiple genes and
-  artificial introduction of mutations, which are useful experimental
-  demonstrations of bacterial genome-wide epistatic
-  phenomena~\cite{miyake2020epistatic}. It uses the combinaison of the
-  construction of sgRNA expression plasmid and transformation of E. Coli strain
-  harbouring pCas by the psgRNA-target and DNA fragment to recover the digested
-  site by CRISPR-Cas9~\cite{xie2014genome}.
-
-  In addition to that, the method most often used to generate variants with
-  random mutations is error-prone PCR\@. Error-prone PCR protocols are
-  modifications of standard PCR methods, designed to alter and enhance the
-  natural error rate of the polymerase. Taq polymerase is commonly used because
+  To generate the libraries of variants that are used in methods involving
+  recombineering, error-prone PCR (epPCR) was developed to perform random
+  mutagenesis. Error-prone PCR protocols are modifications of standard PCR
+  methods, designed to alter and enhance the natural error rate of the
+  polymerase. Taq polymerase is commonly used because
   of its naturally high error rate. Creating high-quality libraries of random
   sequences is an important step in this process as it allows variants of
-  individual molecules to be generated from a single-parent sequence. Combine
+  individual molecules to be generated from a single-parent sequence. Combined
   with the synonymous PAM-inactivating mutation (SPM), precise genome
-  manipulation with high efficiency can be achieve in a few steps with the
-  CRISPRCas9 method~\cite{arnold2003directed}. 
+  manipulation with high efficiency can be achieve in a few steps using CRISPR
+  gene editing methods~\cite{arnold2003directed}. 
 
-  Using all these method advantages and drawbacks, we aim to study the
-  epistasis of E. Coli using the newly designed CRISPR/Cas9-mediated genomic
-  error-prone editing (CREPE) technology.
+  Unfortunately, these methods are still failing in scalability, as the vast
+  number of possible epistatic interactions erodes statistical power.
+  Systematically testing interactions is challenging both from a
+  computational and from a statistical point of view, given the large number of
+  possible interactions to consider~\cite{slim2019novel}. Thus, it is of
+  interest to build models to predict genetic traits based on epistasis.
+  Algorithms such as MINED were developed to detect significant pairwise
+  epistasis effects that contribute the most to cell
+  fitness using machine learning approaches~\cite{he2015mined}. Another study
+  proposed a reinforcement learning approach, EpiRL, where epistasis is modeled
+  as a one-step Markov Decision Process~\cite{huang2019epirl}. The use of
+  machine learning in trying to find highly interacted genes could help tackle
+  the challenges raised by the high-dimensionality of epistasis data.
 
   \section*{Motivations \& Hypotheses}
 
