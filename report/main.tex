@@ -63,12 +63,12 @@
       \Large\textbf{Simon \textsc{Chardin}, Émile \textsc{Sabatier}, Samuel
       \textsc{Diebolt}}
 
-      \vspace{0.8cm}
+      \vfill 
+
+      \textit{Understanding the Impact of Combination of Mutations on
+      Rifampicin Resistance}
  
-      %\includegraphics[width=0.7\textwidth]{readdigits}
-      \vfill
- 
-      \vspace{0.8cm}
+      \vfill 
 
       \includegraphics[width=0.8\textwidth]{espci_logo}
  
@@ -80,7 +80,7 @@
   \pagenumbering{arabic}
 
 
-  \section*{Abstract}
+  \section{Abstract}
 
   \textbf{Deep mutational scanning (DMS) makes use of large-scale mutagenesis
   to reveal intrinsic protein properties, functions and the consequences of
@@ -95,7 +95,7 @@
   of rifampicin. In this report, we replicated the aforementioned epistasis
   study using a simplified dataset provided by A. Choudhury.}
 
-  \section*{State of the Art}
+  \section{State of the Art}
 
   Studying epistasis---be it in human or within bacteria---raises many
   challenges, as it can rarely be done using observational studies. However,
@@ -193,7 +193,7 @@
   machine learning in trying to find highly interacted genes could help tackle
   the challenges raised by the high-dimensionality of epistasis data.
 
-  \section*{Motivations \& Hypotheses}
+  \section{Motivations \& Hypotheses}
 
   Improvements in DNA synthesis and sequencing have underpinned comprehensive
   assessment of gene function in bacteria. And currently, the genome
@@ -237,9 +237,98 @@
   constraint on the selective accessibility to high fitness genotype mutation
   path.
 
-  \section*{Methods \& Results of the Supporting Article}
+  \section{Methods \& Results of the Supporting Article}
 
-  \section*{Effects of Epistasis in Double Mutants}
+  \subsection{CREPE Protocol}
+
+  The CRISPR/Cas9-mediated genomic Error-Prone Editing (CREPE) is a method used
+  to induce mutations from an error-prone PCR in a targeted region using
+  CRISPR/cas9 method. First of all, a single functionnal gRNA must be found for
+  the target. Then a Synonymous Point accepted Mutation (SPM) is introduced in
+  the target. The next step is to amplify and clone the target region with the
+  SPM and unmutated end-homology (for the next step) into a plasmid, inducing
+  error-prone PCR libraries.
+
+  After that, a Cas9-mediated lambda red recombineering technique has been set
+  up. And finally, before the selection, plasmids are cured from the cells at
+  37\textdegree C (Phillips 1999).
+
+  \subsection{Antibiotic selection} 
+
+  Using the CREPE protocol, the authors succeeded to construct mutant
+  libraries. The idea is to study the resistance against an antibiotic, here
+  the rifampicin. Without any mutation on the rpoB gene, the rifampicin can
+  stop the protein production in the cell, by binding itself near the fork in
+  the $\beta$ sub-unit. The mutations due to the error-prone PCR libraries are
+  covering partly the rifampicin resistance-determining regions. This is why
+  it's a good marker for the fitness scoring.
+
+  They decided to compare 4 different cultures. The first one is the wild-type
+  E. coli MG1655, without any change. The second one is a single colony of E.
+  coli MG 1655 + SPM in order to ensure that the SPM does not affect the
+  fitness of the cells. The third one is targeting the rpoB regions : gRNA +
+  SPM only (SPM in RRDR II) . And finally with mutations in addition : gRNA +
+  error-prone PCR synonymous PAM mutation (this adds mutations in the
+  rifampicin resistance-determining regions.
+
+  They have made them grow at 37\textdegree C for 4 hours. After the growth,
+  the Optical Density (OD) at 600 nm have been measured to have a reference.
+  Then, they divided the cultures into 3 samples, each with a different
+  rifampicin concentration. The concentrations are $10$, $50$ and $100$ $\mu
+  g/mL$.
+
+  At the end, a part of the cultures are taken for next-gen sequencing, in
+  order to know the mutations linked to the measured fitness.
+
+  \subsection{Data acquisition} 
+
+  After the selection, the libraries must be sequenced. The DNA was extracted.
+  Each library is, after being amplified, sequenced using Nextera
+  Next-generation sequencing MiSeq 2X300 kit with Illumina. (DNA sequencing
+  manufacturer).
+
+  The raw data have been manipulated to extract information wanted, such as the
+  amino acid changes.
+
+  \subsection{Fitness calculations}
+
+  After the data acquisition, we have two columns, representing the number of
+  colonies before (pre) and after (post) the rifampicin exposition. The fitness
+  is estimated as :
+  $$ fitness = log(\frac{C_{i, post}+0.5}{C_{wt, post}+0.5})-log(\frac{C_{i, pre}+0.5}{C_{wt, pre}+0.5}) $$
+  where $post$ is for the post-selection ($10$, $50$ \& $100$ $\mu g/mL$) and
+  $pre$ is for the pre-selection (at the beginning). $wt$ designates the
+  wild-type variant. The standard error is calculated using the Poisson
+  approximation :
+  $$ StandError = \sqrt{\frac{1}{C_{i, post}+0.5} + \frac{1}{C_{wt, post}+0.5} + \frac{1}{C_{i, pre}+0.5} + \frac{1}{C_{wt, pre}+0.5}} $$
+
+  A filter is necessary in the data. Not all the reads are relevant. Because
+  they have targeted an essential gene, they consider that stop codons could
+  not repeat. They used the following filter:
+  $$ C_{i} \geq C_{stop\,codon, pre} + 2.56.\sqrt{C_{stop\,codon, pre}}$$
+  Only the reads following this condition are kept. For each replicate, the
+  fitness have been combined using Fisher score iterations (Rubin et al. 2017).
+  Only the synonymous mutations have been selected in the dataset. The criteria
+  to determine if a mutant is resistant against the rifampicin is its fitness
+  greater than 2.96 standard deviations than the mean fitness of synonymous
+  mutations.
+  \newline
+  \newline
+  We used the same formulas in our personal analysis.
+
+  \subsection{Epistasis measurement}
+
+  They wanted to compare the fitness of a double mutant with the sum of the
+  fitness of the two single mutants. Only the double mutants where the two
+  single mutants went through the filter are selected. The epistasis is defined
+  as :
+  $$ \epsilon = f_{AB} - (f_{A} + f_{B}) $$
+
+  The idea is to compare the epistasis for different concentrations of
+  rifampicin, in order to see if we gain or not combining two mutations, and to
+  know which mutations are concerned.
+
+  \section{Effects of Epistasis in Double Mutants}
 
   In this section, we replicated the analyses performed by the authors of the
   article supporting this report to better understand the impact of epistasis
@@ -247,7 +336,7 @@
   fitness of double mutants, compared to the sum of fitness from the respective
   single mutations.
 
-  \subsection*{Data Preprocessing}
+  \subsection{Data Preprocessing}
 
   The dataset provided by A. Choudhury was obtained by processing the
   sequencing output from a single biological replicate. Paired Illumina reads
@@ -272,7 +361,11 @@
   pre-selection read counts. The dataset was further processed using code
   available in the archive attached with this report and on a GitHub repository
   (\url{https://github.com/sdiebolt/espci-sbn-homework}). First, non-synonymous
-  mutations were extracted from the \lstinline{aa_change} column. 
+  mutations were extracted from the \lstinline{aa_change} column. The dataset
+  was then aggregated by grouping on the non-synonymous mutations and summing
+  their counts. This step was performed to ensure that later epistasis analyses
+  have access to a dataset containing a unique observation of each combination
+  of non-synonymous mutations.
 
   For each variant, the fitness was estimated as 
   \begin{equation}
@@ -296,7 +389,7 @@
     \text{pre}}}}.
   \end{equation}
 
-  \section*{Next Steps}
+  \section{Next Steps}
 
 
 
